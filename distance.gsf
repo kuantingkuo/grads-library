@@ -1,0 +1,25 @@
+function distance(lon1,lat1,lon2,lat2)
+* Distance between two points on the Earth surface
+    _At=6371229
+    _PI=3.141592654
+    _D2R=_PI/180
+    _R2D=180/_PI
+    Theta1=lon1*_D2R;Phi1=(90-lat1)*_D2R
+    x1=math_sin(Phi1)*math_cos(Theta1)
+    y1=math_sin(Phi1)*math_sin(Theta1)
+    z1=math_cos(Phi1)
+    Theta2=lon2*_D2R;Phi2=(90-lat2)*_D2R
+    x2=math_sin(Phi2)*math_cos(Theta2)
+    x2=math_sin(Phi2)*math_sin(Theta2)
+    z2=math_cos(Phi2)
+*    x=y1*z2-y2*z1
+*    y=x2*z1-x1*z2
+*    z=x1*y2-x2*y1
+*    d2=x*x+y*y+z*z
+    Alpha=math_acos( math_cos(Phi1)*math_cos(Phi2) + math_cos(Theta1-Theta2)*math_sin(Phi1)*math_sin(Phi2) )
+*    'd asin(sqrt('d2'))'
+*    'd acos('Alpha')'
+*say 'T,P: 'Theta1' 'Phi1
+*say 'T,P: 'Theta2' 'Phi2
+*say 'A,cA: 'Alpha' 'subwrd(result,4)
+  return (subwrd(result,4)*_At)    
