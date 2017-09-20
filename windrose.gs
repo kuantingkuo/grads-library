@@ -1,19 +1,31 @@
-* Script to draw wind rose
+* GrADS Script to Draw a Wind Rose Diagram
+*
 * Written by Warren Tennant (tennant at weathersa.co.za) - 11 February 2004
 * Modified by Kuan-Ting Kuo (r0229006@ntu.edu.tw) - 12 September 2016
 *
-* USAGE: windrose <grads-expr for u-comp> <grads-expr for v-comp> <color 1>
-*        <threshold 1> <color 2> .... <threshold n> <color n+1>
+* USAGE: First, set dimensions to your analyzing region, time period, ensemble members.
+*        windrose <grads-expr for u-comp> <grads-expr for v-comp> 
+*        <threshold 1> <color 1> .... <threshold n> <color n>
+* EXAMPLE: windrose u.1 v.2 1 9 2 4 3 5 4 7 5 2
 *
-*Include qdims.gsf
-*        (https://raw.githubusercontent.com/kodamail/gscript/master/qdims.gsf)
-******************************************************************************
+* Include qdims.gsf
+*         (https://raw.githubusercontent.com/kodamail/gscript/master/qdims.gsf)
+***************************************************************************************
 function windrose (args)
+**************************
+* User-defined Variables *
+**************************
+* rotation angle by the original X-Y coordinate (degree)
+rotation = 45
+say 'Rotation Angle = 'rotation' degrees'
+
+* central angle of each fan shape (default:21.6; 0<fangle<22.5)
+fangle = 21.6
+
+***************************************************************************************
 
 rc = gsfallow("on")
-* rotation angle by the original X-Y coordinate (degree)
-rotation=45
-iwarn=0
+* Read input arguments
 u=subwrd(args,1)
 v=subwrd(args,2)
 
@@ -21,14 +33,14 @@ cat=0
 b.cat=0
 while(b.cat != '')
 cat=cat+1
-b.cat=subwrd(args,2*cat+2)
-c.cat=subwrd(args,2*cat+1)
+b.cat=subwrd(args,2*cat+1)
+c.cat=subwrd(args,2*cat+2)
 endwhile
-mxcat=cat
+mxcat=cat-1
 * Maximum User-defined categories
-mucat=mxcat-1
+mucat=mxcat
 
-say 'categories='cat
+say 'Categories = 'cat
 * Test for arguments
 if(u=''|v=''|u='-h'|u='--help');help();exit; endif
 
@@ -103,15 +115,12 @@ while(tim<=t2)
  'd mag('u','v')'
  var=sublin(result,1)
  speed=subwrd(var,4)
- if(speed>=b.mucat)
-  icat=mxcat
- else
-  cat=0
-  while(b.cat<=speed)
-   cat=cat+1
-   icat=cat
-  endwhile
- endif
+ if(speed<b.1);x=x+1;continue;endif
+ cat=mxcat
+ while(b.cat>speed)
+  cat=cat-1
+ endwhile
+ icat=cat
 
 * Find cardinal wind direction
  deg=math_atan2(uu,vv)/3.14159265359*180+180+rotation
@@ -147,24 +156,6 @@ e=e+1
 endwhile
 * Calculate frequencies as percentages
 cat=1
-n.cat=100*n.cat/nsum
-nne.cat=100*nne.cat/nsum
-ne.cat=100*ne.cat/nsum
-ene.cat=100*ene.cat/nsum
-e.cat=100*e.cat/nsum
-ese.cat=100*ese.cat/nsum
-se.cat=100*se.cat/nsum
-sse.cat=100*sse.cat/nsum
-s.cat=100*s.cat/nsum
-ssw.cat=100*ssw.cat/nsum
-sw.cat=100*sw.cat/nsum
-wsw.cat=100*wsw.cat/nsum
-w.cat=100*w.cat/nsum
-wnw.cat=100*wnw.cat/nsum
-nw.cat=100*nw.cat/nsum
-nnw.cat=100*nnw.cat/nsum
-
-cat=2
 while(cat<=mxcat)
  catm=cat-1
  n.cat=100*n.cat/nsum+n.catm
@@ -226,25 +217,6 @@ if(w.cat<minf); minf=w.cat; angle.minf=270; endif
 if(wnw.cat<minf); minf=wnw.cat; angle.minf=292.5; endif
 if(nw.cat<minf); minf=nw.cat; angle.minf=315; endif
 if(nnw.cat<minf); minf=nnw.cat; angle.minf=337.5; endif
-* Output frequencies
-if(1)
-direction=n' 'nne' 'ne' 'ene' 'e' 'ese' 'se' 'sse' 's' 'ssw' 'sw' 'wsw' 'w' 'wnw' 'nw' 'nnw
-cat=1
-while(cat <= mxcat)
- directioncat=n.cat' 'nne.cat' 'ne.cat' 'ene.cat' 'e.cat' 'ese.cat' 'se.cat' 'sse.cat' 's.cat' 'ssw.cat' 'sw.cat' 'wsw.cat' 'w.cat' 'wnw.cat' 'nw.cat' 'nnw.cat
- catm=cat-1
- directioncatm=n.catm' 'nne.catm' 'ne.catm' 'ene.catm' 'e.catm' 'ese.catm' 'se.catm' 'sse.catm' 's.catm' 'ssw.catm' 'sw.catm' 'wsw.catm' 'w.catm' 'wnw.catm' 'nw.catm' 'nnw.catm
- dn=1
- while(dn<=16)
-  dir=subwrd(direction,dn)
-  dircat=subwrd(directioncat,dn)
-  dircatm=subwrd(directioncatm,dn)
-  'define f'cat%dir'='dircat-dircatm
-  dn=dn+1
- endwhile
- cat=cat+1
-endwhile
-endif
 * Draw frame
 'c'
 'set grads off'
@@ -277,7 +249,7 @@ rds=xr-xo
 'set datawarn on'
 'all=const(lon,1,-a)'
 
-ddeg=10.8
+ddeg=fangle/2
 cat=mxcat
 while(cat>0)
  catm=cat-1
@@ -626,19 +598,12 @@ yhi=ymax-0.2
 yint=(yhi-ylo)/mxcat
 'set string 1 l'
 cnum=1
-'set line 'c.cnum
-'draw polyf '%(xlo+xhi)/2%' 'ylo' 'xlo' '%ylo+yint*cnum%' 'xhi' '%ylo+yint*cnum%' '%(xlo+xhi)/2%' 'ylo
-'set line 0 1 6'
-'draw line '%(xlo+xhi)/2%' 'ylo' 'xlo' '%ylo+yint*cnum
-'draw line '%(xlo+xhi)/2%' 'ylo' 'xhi' '%ylo+yint*cnum
-'draw string '%xhi+0.1%' '%ylo+yint*cnum%' 'b.cnum
-cnum=cnum+1
-while(cnum<=mucat)
+while(cnum<=mucat-1)
  'set line 'c.cnum
  'draw recf 'xlo' '%ylo+yint*(cnum-1)%' 'xhi' '%ylo+yint*cnum
  'set line 0 1 6'
  'draw rec 'xlo' '%ylo+yint*(cnum-1)%' 'xhi' '%ylo+yint*cnum
- 'draw string '%xhi+0.1%' '%ylo+yint*cnum%' 'b.cnum
+ 'draw string '%xhi+0.1%' '%ylo+yint*(cnum-1)%' 'b.cnum
  cnum=cnum+1
 endwhile
 'set line 'c.cnum
@@ -647,6 +612,7 @@ endwhile
 'draw line '%(xlo+xhi)/2%' 'yhi' 'xlo' '%ylo+yint*(cnum-1)
 'draw line '%(xlo+xhi)/2%' 'yhi' 'xhi' '%ylo+yint*(cnum-1)
 'draw line 'xlo' '%ylo+yint*(cnum-1)%' 'xhi' '%ylo+yint*(cnum-1)
+'draw string '%xhi+0.1%' '%ylo+yint*(cnum-1)%' 'b.cnum
 
 * Initialize dimensions
 mprojs='scaled latlon nps sps robinson mollweide orthogr'
@@ -667,5 +633,8 @@ endif
 return
 **********************************
 function help()
-say "* USAGE: windrose <grads-expr for u-comp> <grads-expr for v-comp> <color 1> <threshold 1> <color 2> .... <threshold n> <color n+1>"
+say ' USAGE: First, set dimensions to your analyzing region, time period, ensemble members.'
+say '        windrose <grads-expr for u-comp> <grads-expr for v-comp>'
+say '        <threshold 1> <color 1> .... <threshold n> <color n>'
+say ' EXAMPLE: windrose u.1 v.2 1 9 2 4 3 5 4 7 5 2'
 return
