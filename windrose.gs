@@ -16,7 +16,7 @@ function windrose (args)
 * User-defined Variables *
 **************************
 * rotation angle by the original X-Y coordinate (degree)
-rotation = 45
+rotation = 0
 say 'Rotation Angle = 'rotation' degrees'
 
 * central angle of each fan shape (default:21.6; 0<fangle<22.5)
@@ -40,7 +40,7 @@ mxcat=cat-1
 * Maximum User-defined categories
 mucat=mxcat
 
-say 'Categories = 'cat
+say 'Categories = 'mucat
 * Test for arguments
 if(u=''|v=''|u='-h'|u='--help');help();exit; endif
 
@@ -107,9 +107,11 @@ while(tim<=t2)
  'd 'u
  var=sublin(result,1)
  uu=subwrd(var,4)
+* if(uu=-9.99e+08);x=x+1;continue;endif
  'd 'v
  var=sublin(result,1)
  vv=subwrd(var,4)
+* if(vv=-9.99e+08);x=x+1;continue;endif
 
 * Find wind magnitude
  'd mag('u','v')'
@@ -613,6 +615,59 @@ endwhile
 'draw line '%(xlo+xhi)/2%' 'yhi' 'xhi' '%ylo+yint*(cnum-1)
 'draw line 'xlo' '%ylo+yint*(cnum-1)%' 'xhi' '%ylo+yint*(cnum-1)
 'draw string '%xhi+0.1%' '%ylo+yint*(cnum-1)%' 'b.cnum
+
+* Print frequency
+spd='';cat=1
+while(cat<=mxcat);spd=spd%math_format('%5.2g',b.cat)'  ';cat=cat+1;endwhile
+say spd
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',n.cat-n.catm)' ';cat=cat+1;endwhile
+say 'N  : 'freq' (%)'
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',nne.cat-nne.catm)' ';cat=cat+1;endwhile
+say 'NNE: 'freq' (%)'
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',ne.cat-ne.catm)' ';cat=cat+1;endwhile
+say 'NE : 'freq' (%)'
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',ene.cat-ene.catm)' ';cat=cat+1;endwhile
+say 'ENE: 'freq' (%)'
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',e.cat-e.catm)' ';cat=cat+1;endwhile
+say 'E  : 'freq' (%)'
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',ese.cat-ese.catm)' ';cat=cat+1;endwhile
+say 'ESE: 'freq' (%)'
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',se.cat-se.catm)' ';cat=cat+1;endwhile
+say 'SE : 'freq' (%)'
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',sse.cat-sse.catm)' ';cat=cat+1;endwhile
+say 'SSE: 'freq' (%)'
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',s.cat-s.catm)' ';cat=cat+1;endwhile
+say 'S  : 'freq' (%)'
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',ssw.cat-ssw.catm)' ';cat=cat+1;endwhile
+say 'SSW: 'freq' (%)'
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',sw.cat-sw.catm)' ';cat=cat+1;endwhile
+say 'SW : 'freq' (%)'
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',wsw.cat-wsw.catm)' ';cat=cat+1;endwhile
+say 'WSW: 'freq' (%)'
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',w.cat-w.catm)' ';cat=cat+1;endwhile
+say 'W  : 'freq' (%)'
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',wnw.cat-wnw.catm)' ';cat=cat+1;endwhile
+say 'WNW: 'freq' (%)'
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',nw.cat-nw.catm)' ';cat=cat+1;endwhile
+say 'NW : 'freq' (%)'
+freq='';cat=1
+while(cat<=mxcat);catm=cat-1;freq=freq%math_format('%6.3f',nnw.cat-nnw.catm)' ';cat=cat+1;endwhile
+say 'NNW: 'freq' (%)'
 
 * Initialize dimensions
 mprojs='scaled latlon nps sps robinson mollweide orthogr'
