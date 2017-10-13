@@ -3,6 +3,8 @@ function ini(arg)
 'c'
 'set xlopts 1 3 0.2'
 'set ylopts 1 3 0.22'
+'set rgb 999 140 140 140'
+'set map 1 1 8'
 *'set mproj off'
 if(arg='-s'|arg='-square');'set parea 2.45 8.95 1.25 7.75';endif
 if(arg='-l'|arg='-horizontal');'set parea 1.3 10. 1.3 7.75';endif
