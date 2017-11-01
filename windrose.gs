@@ -15,15 +15,22 @@ function windrose (args)
 **************************
 * User-defined Variables *
 **************************
-* rotation angle by the original X-Y coordinate (degree)
-rotation = 0
-say 'Rotation Angle = 'rotation' degrees'
 
-* central angle of each fan shape (default:21.6; 0<fangle<22.5)
+* Auto select categories of frequency (1: auto select; 0: user defined)
+autofreq = 0
+** User-defined frequency on the diagram. (Only use when autofreq = 0)
+** maxf must be devided by intf
+maxf = 30
+intf = 10
+
+* central angle of each fan shape (default:21.6; range: 0<fangle<22.5)
 fangle = 21.6
 
-***************************************************************************************
+* rotation angle by the original X-Y coordinate (degree)
+rotation = 45
+if(rotation!=0);say 'Rotation Angle = 'rotation' degrees';endif
 
+***************************************************************************************
 rc = gsfallow("on")
 * Read input arguments
 u=subwrd(args,1)
@@ -179,28 +186,37 @@ while(cat<=mxcat)
 
  cat=cat+1
 endwhile
-* Find maximum frequency to scale graphic
 cat=cat-1
-maxf=0
-if(n.cat>maxf); maxf=n.cat; endif
-if(nne.cat>maxf); maxf=nne.cat; endif
-if(ne.cat>maxf); maxf=ne.cat; endif
-if(ene.cat>maxf); maxf=ene.cat; endif
-if(e.cat>maxf); maxf=e.cat; endif
-if(ese.cat>maxf); maxf=ese.cat; endif
-if(se.cat>maxf); maxf=se.cat; endif
-if(sse.cat>maxf); maxf=sse.cat; endif
-if(s.cat>maxf); maxf=s.cat; endif
-if(ssw.cat>maxf); maxf=ssw.cat; endif
-if(sw.cat>maxf); maxf=sw.cat; endif
-if(wsw.cat>maxf); maxf=wsw.cat; endif
-if(w.cat>maxf); maxf=w.cat; endif
-if(wnw.cat>maxf); maxf=wnw.cat; endif
-if(nw.cat>maxf); maxf=nw.cat; endif
-if(nnw.cat>maxf); maxf=nnw.cat; endif
-intf=math_int(maxf/5)+1
-maxf=intf*5
-* Find the wind direction of minimum frequency
+* Find the maximum frequency to scale graphic
+if(autofreq)
+ maxf=0
+ if(n.cat>maxf); maxf=n.cat; endif
+ if(nne.cat>maxf); maxf=nne.cat; endif
+ if(ne.cat>maxf); maxf=ne.cat; endif
+ if(ene.cat>maxf); maxf=ene.cat; endif
+ if(e.cat>maxf); maxf=e.cat; endif
+ if(ese.cat>maxf); maxf=ese.cat; endif
+ if(se.cat>maxf); maxf=se.cat; endif
+ if(sse.cat>maxf); maxf=sse.cat; endif
+ if(s.cat>maxf); maxf=s.cat; endif
+ if(ssw.cat>maxf); maxf=ssw.cat; endif
+ if(sw.cat>maxf); maxf=sw.cat; endif
+ if(wsw.cat>maxf); maxf=wsw.cat; endif
+ if(w.cat>maxf); maxf=w.cat; endif
+ if(wnw.cat>maxf); maxf=wnw.cat; endif
+ if(nw.cat>maxf); maxf=nw.cat; endif
+ if(nnw.cat>maxf); maxf=nnw.cat; endif
+ intf=math_int(maxf/5)+1
+ maxf=intf*5
+ ncircle=5
+else
+ if(math_mod(maxf,intf)!=0)
+   say "Error: maxf cannot be divided by inf"
+   exit
+ endif
+ ncircle=maxf/intf
+endif
+* Find the wind direction of the minimum frequency
 angle.minf=0
 minf=100
 if(n.cat<minf); minf=n.cat; angle.minf=0; endif
@@ -248,7 +264,6 @@ yb=subwrd(var4,4);yt=subwrd(var4,6);yo=(yb+yt)/2
 rds=xr-xo
 * Draw WINDROSE
 'set gxout contour'
-'set datawarn on'
 'all=const(lon,1,-a)'
 
 ddeg=fangle/2
@@ -559,15 +574,15 @@ xs=subwrd(result,3);ys=subwrd(result,6)
 xs=subwrd(result,3);ys=subwrd(result,6)
 'draw string 'xs' 'ys' NNW'
 
-* Draw labels on each of the 5 concentric circles
+* Draw labels on each of the concentric circles
 'set string 1 c'
 'set strsiz 0.09 0.12'
 'q string 100 % '
 wid=subwrd(result,4)
 *xsl=xo-wid/2;xsr=xo+wid/2
 circle=1
-while(circle<=5)
- ys=rds/5*circle+yo
+while(circle<=ncircle)
+ ys=rds/ncircle*circle+yo
  'q xy2w 'xo' 'ys
  lat1=subwrd(result,6)
  'q w2xy 'angle.minf' 'lat1
