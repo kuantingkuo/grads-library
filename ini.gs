@@ -33,4 +33,8 @@ w=6/yl*xl/2
 'set parea '6-w' '6+w' 1.25 7.75'
 say 'set parea '6-w' '6+w' 1.25 7.75'
 endif
+
+** Constants **
+pi=3.141592653589793
+**
 return
