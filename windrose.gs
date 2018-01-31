@@ -18,10 +18,11 @@ function windrose (args)
 
 * Auto select categories of frequency (1: auto select; 0: user defined)
 autofreq = 0
-** User-defined frequency on the diagram. (Only use when autofreq = 0)
+** User-defined categories of frequency on the diagram. (Only using when autofreq = 0)
 ** maxf must be devided by intf
+** (maxf: Maximum frequency shows on the diagram. intf: Interval between categories)
 maxf = 30
-intf = 10
+intf = 6
 
 * central angle of each fan shape (default:21.6; range: 0<fangle<22.5)
 fangle = 21.6
