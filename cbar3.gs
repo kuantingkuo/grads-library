@@ -29,7 +29,7 @@ function colorbar (args)
     ywid = (yhi-ylo)/cnum
     ymid = ysiz/2
     yb = ylo-0.001
-    'set string 1 l 1'
+    'set string 1 l 3'
     vert = 1
   else
 *    yt = ylo - 0.45
@@ -38,7 +38,7 @@ function colorbar (args)
     xmid = (xlo+xhi)/2-0.3
     xwid = (xhi-xlo+0.5)/cnum
     xl = xmid - xwid*cnum/2
-    'set string 1 tc 5'
+    'set string 1 tc 3'
     vert = 0
   endif
 ************************
@@ -98,8 +98,10 @@ function colorbar (args)
     endif
     if (num=cnum-1 & args!='')
       if (vert)
+        'set string 1 bl 1'
         'draw string '%(xr+0.05)%' 'yt' 'args
       else
+        'set string 1 tl 1'
         'draw string 'xr' '%(yb-0.05)%' 'args
       endif
     endif
