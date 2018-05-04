@@ -741,7 +741,7 @@ function help()
   say '                        [min:max] is divided by "div" (default: 10)'
   say '     -gxout gxout-name: Type of gxout'
   say '     -kind kind       : One color list name: bluered, rainbow, redblue, grainbow'
-  say '                        , haxby, precip, drywet, hot, cwb, topo, cubehelix'
+  say '                        , haxby, precip, drywet, hot, cwb, topo, cubehelix, gy100'
   say '                        or color list name, color name, and/or rgb(a) values connected with "->".'
   say '                        e.g., blue->white->red, bluered,'
   say '                              (200,100,100)->red->(0.0,0)'
