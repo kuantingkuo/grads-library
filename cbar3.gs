@@ -19,10 +19,14 @@ function colorbar (args)
   xd = xsiz - xhi
 
   cnum = subwrd(shdinfo,5)
-*say cnum
   cwid = 0.2
 
-  if (xd-0.025-cwid-1.0 >= ylo-0.3-cwid-0.12)
+  'set strsiz 0.1 0.12'
+  'q string 'args
+  larg = subwrd(result,4)
+  if(larg<0.75);larg=0.75;endif
+
+  if (xd >= 0.4+larg & yhi-ylo > cwid*cnum)
     xl = xhi + 0.1
     xr = xl + cwid
     xwid = 0.15
@@ -32,11 +36,13 @@ function colorbar (args)
     'set string 1 l 3'
     vert = 1
   else
-*    yt = ylo - 0.45
-    yt=cwid+0.3
+    yt = ylo - 0.85
+*    yt=cwid+0.3
     yb = yt - cwid
-    xmid = (xlo+xhi)/2-0.3
-    xwid = (xhi-xlo+0.5)/cnum
+*    xmid = (xlo+xhi-larg)/2
+    xmid = (xlo+xhi-0.7)/2
+*    xwid = (xhi-xlo+0.5)/cnum
+    xwid = (xsiz-xmid-larg)*2/cnum
     xl = xmid - xwid*cnum/2
     'set string 1 tc 3'
     vert = 0
