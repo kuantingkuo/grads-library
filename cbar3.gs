@@ -22,9 +22,13 @@ function colorbar (args)
   cwid = 0.2
 
   'set strsiz 0.1 0.12'
-  'q string 'args
-  larg = subwrd(result,4)
-  if(larg<0.75);larg=0.75;endif
+  if(args='')
+    larg=0.75
+  else
+    'q string 'args
+    larg = subwrd(result,4)
+    if(larg<0.75);larg=0.75;endif
+  endif
 
   if (xd >= 0.4+larg & yhi-ylo > cwid*cnum)
     xl = xhi + 0.1
@@ -36,12 +40,14 @@ function colorbar (args)
     'set string 1 l 3'
     vert = 1
   else
-    yt = ylo - 0.85
-*    yt=cwid+0.3
-    yb = yt - cwid
-*    xmid = (xlo+xhi-larg)/2
+    if(ylo >= 1.22)
+      yt = ylo - 0.85
+      yb = yt - cwid
+    else
+      yb = 0.2
+      yt = yb + cwid
+    endif
     xmid = (xlo+xhi-0.7)/2
-*    xwid = (xhi-xlo+0.5)/cnum
     xwid = (xsiz-xmid-larg)*2/cnum
     xl = xmid - xwid*cnum/2
     'set string 1 tc 3'
