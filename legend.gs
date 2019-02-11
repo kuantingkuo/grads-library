@@ -16,7 +16,7 @@ while(n<=n2);name.ind=subwrd(args,n);ind=ind+1;n=n+1;endwhile
 n2=n+num-1;ind=1
 while(n<=n2);color.ind=subwrd(args,n);ind=ind+1;n=n+1;endwhile
 n2=n+num-1;ind=1
-while(n<=n2);style.n=subwrd(args,n);ind=ind+1;n=n+1;endwhile
+while(n<=n2);style.ind=subwrd(args,n);ind=ind+1;n=n+1;endwhile
 
 n=1
 long=0
