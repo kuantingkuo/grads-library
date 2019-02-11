@@ -1,0 +1,5 @@
+'set frame off'
+'set grid off'
+'set mpdraw off'
+'set xlab off'
+'set ylab off'

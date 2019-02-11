@@ -1,0 +1,5 @@
+'set frame on'
+'set grid on'
+'set mpdraw on'
+'set xlab on'
+'set ylab on'
