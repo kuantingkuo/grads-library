@@ -10,7 +10,7 @@ if(arg='-s'|arg='-square');'set parea 2.45 8.95 1.25 7.75';endif
 if(arg='-l'|arg='-horizontal');'set parea 1.3 10. 1.3 7.75';endif
 if(arg='-h'|arg='-vertical');'set parea 1.4 9.4 0.8 7.75';endif
 if(arg='-eq'|arg='equal');equal_grid();endif
-'set font 05'
+'set font 01'
 return
 
 function equal_grid()
@@ -35,6 +35,6 @@ say 'set parea '6-w' '6+w' 1.25 7.75'
 endif
 
 ** Constants **
-pi=3.141592653589793
+_pi=3.141592653589793
 **
 return
