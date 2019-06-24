@@ -1,0 +1,20 @@
+## color.gs
+### Available Kinds:
+#### bluered
+#### rainbow
+#### redblue
+#### grainbow
+#### revgrainbow
+#### haxby
+#### precip
+#### drywet
+#### hot
+#### revhot
+#### cwb
+#### topo
+#### cubehelix
+#### jet
+#### gy100
+#### IR
+#### sunset
+#### StepSeq
