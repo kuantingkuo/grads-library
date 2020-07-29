@@ -9,8 +9,11 @@ function ini(arg)
 if(arg='-s'|arg='-square');'set parea 2.45 8.95 1.25 7.75';endif
 if(arg='-l'|arg='-horizontal');'set parea 1.3 10. 1.3 7.75';endif
 if(arg='-h'|arg='-vertical');'set parea 1.4 9.4 0.8 7.75';endif
-if(arg='-eq'|arg='equal');equal_grid();endif
+if(arg='-eq'|arg='-equal');equal_grid();endif
 'set font 01'
+
+constants()
+
 return
 
 function equal_grid()
@@ -24,17 +27,17 @@ else
   yl=qdims(zmax)-qdims(zmin)
 endif
 
-if(xl/yl>9.5/6.5)
-w=9.5/xl*yl/2
-'set parea 1.25 10.75 '4.5-w' '4.5+w
-say 'set parea 1.25 10.75 '4.5-w' '4.5+w
+if(xl/yl>8.7/6)
+  w=8.7/xl*yl/2
+  'set parea 1.3 10 '4.5-w' '4.5+w
+  say 'set parea 1.3 10 '4.5-w' '4.5+w
 else
-w=6/yl*xl/2
-'set parea '6-w' '6+w' 1.25 7.75'
-say 'set parea '6-w' '6+w' 1.25 7.75'
+  w=6/yl*xl/2
+  'set parea '6-w' '6+w' 1.25 7.75'
+  say 'set parea '6-w' '6+w' 1.25 7.75'
 endif
+return
 
-** Constants **
+function constants()
 _pi=3.141592653589793
-**
 return
