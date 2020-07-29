@@ -248,7 +248,7 @@ function color( args )
 *  endif
 
 **** one more color if gxout=shaded etc.
-  if( gxout = 'grfill' | gxout = 'shaded' | gxout = 'shaded1' | gxout = 'shaded2' | gxout = 'shaded2b' )
+  if( gxout = 'grfill' | gxout = 'shaded' | gxout = 'shade1' | gxout = 'shade2' | gxout = 'shade2b' )
     colnum = colnum + 1
     cols = cols % ' ' % (colnum+15)
   endif
@@ -744,7 +744,7 @@ function help()
   say '     -gxout gxout-name: Type of gxout'
   say '     -kind kind       : One color list name: bluered, rainbow, redblue, grainbow'
   say '                        , haxby, precip, drywet, hot, cwb, topo, cubehelix, gy100'
-  say '                        , IR'
+  say '                        , IR, sunset, StepSeq, topo2'
   say '                        or color list name, color name, and/or rgb(a) values connected with "->".'
   say '                        e.g., blue->white->red, bluered,'
   say '                              (200,100,100)->red->(0.0,0)'
