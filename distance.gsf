@@ -22,4 +22,4 @@ function distance(lon1,lat1,lon2,lat2)
 *say 'T,P: 'Theta1' 'Phi1
 *say 'T,P: 'Theta2' 'Phi2
 *say 'A,cA: 'Alpha' 'subwrd(result,4)
-  return (subwrd(result,4)*_At)    
+  return (Alpha*_At)    
