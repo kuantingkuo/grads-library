@@ -151,6 +151,16 @@ function xcbar( args )
       endif
       if( arg = '-unit' )
         unit = subwrd( args, i )
+        temp = ''
+        while(1)
+          temp = subwrd( args, i+1 )
+          temp = substr( temp, 1, 1)
+          if( temp = '-' | temp = '' )
+            break
+          endif
+          i=i+1
+          unit = unit' '%subwrd( args, i )
+        endwhile
         i=i+1
         break
       endif
