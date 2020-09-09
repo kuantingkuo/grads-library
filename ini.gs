@@ -17,24 +17,31 @@ constants()
 return
 
 function equal_grid()
+x1=1.3;x2=10
+y1=1.25;y2=7.75
+'set mproj scaled'
 rc = gsfallow("on")
-if(qdims(xtype)='varying');xl=qdims(xmax)-qdims(xmin)
-  if(qdims(ytype)='varying');yl=qdims(ymax)-qdims(ymin)
-  else;yl=qdims(zmax)-qdims(zmin)
+if(qdims(xtype)='varying');xl=qdims(lonmax)-qdims(lonmin)
+  if(qdims(ytype)='varying');yl=qdims(latmax)-qdims(latmin)
+  else;yl=qdims(levmax)-qdims(levmin)
   endif
 else
-  xl=qdims(ymax)-qdims(ymin)
-  yl=qdims(zmax)-qdims(zmin)
+  xl=qdims(latmax)-qdims(latmin)
+  yl=qdims(levmax)-qdims(levmin)
 endif
 
-if(xl/yl>8.7/6)
-  w=8.7/xl*yl/2
-  'set parea 1.3 10 '4.5-w' '4.5+w
-  say 'set parea 1.3 10 '4.5-w' '4.5+w
+dx=x2-x1
+dy=y2-y1
+mx=(x1+x2)/2
+my=(y1+y2)/2
+if(xl/yl>dx/dy)
+  w=dx/xl*yl/2
+  'set parea 'x1' 'x2' 'my-w' 'my+w
+  say 'set parea 'x1' 'x2' 'my-w' 'my+w
 else
-  w=6/yl*xl/2
-  'set parea '6-w' '6+w' 1.25 7.75'
-  say 'set parea '6-w' '6+w' 1.25 7.75'
+  w=dy/yl*xl/2
+  'set parea 'mx-w' 'mx+w' 'y1' 'y2
+  say 'set parea 'mx-w' 'mx+w' 'y1' 'y2
 endif
 return
 
