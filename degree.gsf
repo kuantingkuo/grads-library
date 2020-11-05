@@ -1,0 +1,8 @@
+function degree(xo,yo,xa,ya,xb,yb)
+**calculate the degree of angle_AOB
+vAx=xa-xo
+vAy=ya-yo
+vBx=xb-xo
+vBy=yb-yo
+degree=math_acos((vAx*vBx+vAy*vBy)/(math_sqrt(vAx*vAx+vAy*vAy)*math_sqrt(vBx*vBx+vBy*vBy)))*(180/3.141592654)
+return(degree)
