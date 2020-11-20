@@ -25,7 +25,7 @@ while(n<=num)
 'q string 'name.n
 temp=subwrd(result,4)
 if(temp>long);long=temp;endif
-if(style.n='style.'n);style.n=1;endif
+if(style.n='style.'n|style.n='');style.n=1;endif
 n=n+1
 endwhile
 w=long+1
@@ -59,8 +59,8 @@ n=1
 while(n<=num)
 _y.n=yt-h/2-(n-1)*h
 *say '_y.'n' = '_y.n
-'set line 'color.n' 'style.n' 9'
-say 'set line 'color.n' 'style.n' 9'
+'set line 'color.n' 'style.n' 8'
+say 'set line 'color.n' 'style.n' 8'
 'draw line '_ll' '_y.n' 'xr' '_y.n
 'set string 1 r'
 'draw string '_wr' '_y.n' 'name.n
