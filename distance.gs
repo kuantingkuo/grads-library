@@ -2,7 +2,8 @@ function distance(args)
 * Distance between two points on the Earth surface
     lon2=subwrd(args,1);lat2=subwrd(args,2)
     if (lon2=''|lat2='');rc=help();return;endif
-    At=6371229
+*    At=6371229
+    At=6371220
     PI=3.141592654
     D2R=PI/180
     R2D=180/PI

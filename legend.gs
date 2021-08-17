@@ -1,7 +1,7 @@
 function legend(args)
 ************************
 frame=0
-mg=0.3; h=0.4
+mg=0.01; h=0.4
 *mg: distance between legend and margin
 *h : hight of a line
 ************************
@@ -49,7 +49,7 @@ if(pos=bc);xl=(xl+xr)/2-w/2;yb=yb+mg;xr=xl+w;yt=yb+num*h;endif
 if(pos=br);xr=xr-mg;yb=yb+mg;xl=xr-w;yt=yb+num*h;endif
 
 'set rgb 200 255 255 255 200'
-'set line 200'
+'set line 0'
 'draw recf 'xl' 'yb' 'xr' 'yt
 if(frame);'set line 1';'draw rec 'xl' 'yb' 'xr' 'yt;endif
 xr=xr-0.1
