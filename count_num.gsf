@@ -1,0 +1,7 @@
+function count_num(arg)
+    i=1
+    while(subwrd(arg,i) != '')
+        i=i+1
+    endwhile
+    i=i-1
+    return i
