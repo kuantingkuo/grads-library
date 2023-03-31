@@ -21,14 +21,14 @@ autofreq = 0
 ** User-defined categories of frequency on the diagram. (Only using when autofreq = 0)
 ** maxf must be devided by intf
 ** (maxf: Maximum frequency shows on the diagram. intf: Interval between categories)
-maxf = 30
-intf = 6
+maxf = 45
+intf = 9
 
 * central angle of each fan shape (default:21.6; range: 0<fangle<22.5)
 fangle = 21.6
 
 * rotation angle by the original X-Y coordinate (degree)
-rotation = 45
+rotation = 0
 if(rotation!=0);say 'Rotation Angle = 'rotation' degrees';endif
 
 ***************************************************************************************
@@ -237,13 +237,17 @@ if(wnw.cat<minf); minf=wnw.cat; angle.minf=292.5; endif
 if(nw.cat<minf); minf=nw.cat; angle.minf=315; endif
 if(nnw.cat<minf); minf=nnw.cat; angle.minf=337.5; endif
 * Draw frame
+latdis=dlat*100
+if(latdis>90);latdis=90;endif
+say latdis
 'c'
 'set grads off'
 'set mproj sps'
 'set mpdraw off'
-'set lat -90 0'
+'set lat -90 'latdis-90
 'set lon 0 360'
-'set mpvals -180 180 -90 0'
+*'set mpvals -180 180 -90 0'
+'set mpvals -180 180 -90 'latdis-90
 'set gxout contour'
 'set grid off'
 'set frame off'
@@ -251,7 +255,7 @@ if(nnw.cat<minf); minf=nnw.cat; angle.minf=337.5; endif
 'set ccolor 1'
 'set cthick 6'
 'set cstyle 1'
-'set clevs -1e-10'
+'set clevs 'latdis-90
 'd lat'
 
 * Get Virtual Page info
