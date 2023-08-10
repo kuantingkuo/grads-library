@@ -7,7 +7,7 @@ function ini(arg)
 'set map 1 1 8'
 *'set mproj off'
 if(arg='-s'|arg='-square');'set parea 2.45 8.95 1.25 7.75';endif
-if(arg='-l'|arg='-horizontal');'set parea 1.3 10. 1.3 7.75';endif
+if(arg='-l'|arg='-horizontal');'set parea 1.4 9.8 1.3 7.75';endif
 if(arg='-h'|arg='-vertical');'set parea 1.5 9.4 0.8 7.75';endif
 if(arg='-eq'|arg='-equal');equal_grid();endif
 'set font 01'
