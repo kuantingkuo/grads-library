@@ -6,14 +6,14 @@
 *    doi:10.1175/JAMC-D-17-0334.1.
 **************************************************************************************
 function t2qs(args)
-    if(args='')
+    t=subwrd(args,1)
+    P=subwrd(args,2)
+    if(args=''|P='')
         say 'USEAGE: t2qs (temperature[C]) (pressure[Pa])'
+        say '        es[Pa] and qs[kg/kg] will be defined.'
         exit
-    else
-        t=subwrd(args,1)
-        P=subwrd(args,2)
     endif
-    'es = exp(34.494 - 4924.99/('t'+237.1)) / pow('t'+105,1.57)'
+    't2es 't
     'qs = 0.622*es / ('P' - (1-0.622)*es )'
     say 'save saturated specific humidity as qs [kg/kg]'
 return 
