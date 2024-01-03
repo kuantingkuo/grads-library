@@ -17,6 +17,8 @@ n2=n+num-1;ind=1
 while(n<=n2);color.ind=subwrd(args,n);ind=ind+1;n=n+1;endwhile
 n2=n+num-1;ind=1
 while(n<=n2);style.ind=subwrd(args,n);ind=ind+1;n=n+1;endwhile
+n2=n+num-1;ind=1
+while(n<=n2);mark.ind=subwrd(args,n);ind=ind+1;n=n+1;endwhile
 
 n=1
 long=0
@@ -26,6 +28,7 @@ while(n<=num)
 temp=subwrd(result,4)
 if(temp>long);long=temp;endif
 if(style.n='style.'n|style.n='');style.n=1;endif
+if(mark.n='mark.'n|mark.n='');mark.n=0;endif
 n=n+1
 endwhile
 w=long+1
@@ -59,8 +62,9 @@ n=1
 while(n<=num)
 _y.n=yt-h/2-(n-1)*h
 *say '_y.'n' = '_y.n
-'set line 'color.n' 'style.n' 8'
-say 'set line 'color.n' 'style.n' 8'
+'set line 'color.n' 'style.n' 5'
+say 'set line 'color.n' 'style.n' 5'
+'draw mark 'mark.n' '%(_ll+xr)/2%' '_y.n' 0.15'
 'draw line '_ll' '_y.n' 'xr' '_y.n
 'set string 1 r'
 'draw string '_wr' '_y.n' 'name.n
@@ -71,7 +75,7 @@ return
 
 function help()
 say '** For legend.gs **'
-say 'legend pos num string.1 ... string.num color.1 ... color.num [style.1 ... style.num]'
+say 'legend pos num string.1 ... string.num color.1 ... color.num [style.1 ... style.num [mark.1 ... mark.num]]'
 say ''
 say '** For legend.gsf **'
 say 'rc = gsfallow("on")'
