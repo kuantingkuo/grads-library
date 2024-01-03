@@ -264,8 +264,8 @@ MAscentT= 1
 MAscentI= 5
 DrawHeli= 0
 DrawHodo= 0
-DrawPLev= 0
-DrawZLev= 2
+DrawPLev= 1
+DrawZLev= 0
 DrawZSTD= 0
 LblAxes = 1
 
@@ -683,9 +683,9 @@ If (DrawPLev = 1 & LblAxes = 1)
    "set strsiz 0.10"
    "set string 1 c 3 0"
    If (PageType = "Portrait") 
-      "draw string 0.5 10.85 mb"
+      "draw string 0.5 10.85 hPa"
    Else
-      "draw string 0.5 8.35 mb"
+      "draw string 0.5 8.35 hPa"
    Endif
 Endif
 
@@ -1247,7 +1247,7 @@ If (DrawIndx = 1)
    "set line 1 1 3"
    "draw rec  "Text2XC-0.75 " " Text2YC-0.60 " " Text2XC+0.90 " " Text2YC+0.85
    "draw string "Text2XC-0.45 " " Text2YC+0.70 " Lowest level"
-   "draw string "Text2XC-0.70 " " Text2YC+0.45 "  Press (mb)" 
+   "draw string "Text2XC-0.70 " " Text2YC+0.45 "  Press (hPa)" 
    "draw string "Text2XC+0.35 " " Text2YC+0.45 " " math_int(SfcPlev*10)/10
    "draw string "Text2XC-0.70 " " Text2YC+0.30 "  Temp (`3.`0C)" 
    "draw string "Text2XC+0.35 " " Text2YC+0.30 " " math_int(Sfctemp*10)/10
@@ -1266,7 +1266,7 @@ If (DrawIndx = 1)
    "set line 1 1 3"
    "draw rec  "Text3XC-0.75 " " Text3YC-0.55 " "  Text3XC+0.90 " " Text3YC+0.85
    "draw string "Text3XC-0.50 " " Text3YC+0.70 " Most Unstable"
-   "draw string "Text3XC-0.70 " " Text3YC+0.45 "  Press (mb)" 
+   "draw string "Text3XC-0.70 " " Text3YC+0.45 "  Press (hPa)" 
    "draw string "Text3XC+0.35 " " Text3YC+0.45 " " math_int(PMaxThee*10)/10
    "draw string "Text3XC-0.70 " " Text3YC+0.30 "  Temp (`3.`0C)" 
    "draw string "Text3XC+0.35 " " Text3YC+0.30 " " math_int(Sfctemp*10)/10
