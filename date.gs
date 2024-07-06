@@ -1,17 +1,20 @@
 function date(args)
 ***** Default value *****
-    timestring=''
     format='%F %H:%M'
 *************************
-    if (args='')
+    rc=gsfallow('on')
+    if (args='-h')|(args='--help')
         help()
         return
     endif
     string1=subwrd(args,1)
+    if (string1='')
+        string1=qdims('timemin')
+    endif
     c1=substr(string1,1,1)
     if (c1='%')
-        help()
-        return
+        format=string1
+        string1=qdims('timemin')
     endif
     lentot=math_strlen(args)
     len1=math_strlen(string1)
@@ -27,7 +30,7 @@ function date(args)
 return rc
 
 function help()
-    say 'date <datetime string> [<format>]'
+    say 'date [<datetime string>] [<format>]'
     say 'example:'
     say '   date 00Z07SEP2017 %Y%m%d %H:%M:%S'
     say '   >> 20170907 00:00:00'
