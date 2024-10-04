@@ -8,12 +8,22 @@
 function t2qs(args)
     t=subwrd(args,1)
     P=subwrd(args,2)
+    poly=subwrd(args,3)
     if(args=''|P='')
-        say 'USEAGE: t2qs (temperature[C]) (pressure[Pa])'
-        say '        es[Pa] and qs[kg/kg] will be defined.'
+        help()
         exit
     endif
-    't2es 't
+    if(poly='-poly')
+        't2es_poly 't
+    else
+        't2es 't
+    endif
     'qs = 0.622*es / ('P' - (1-0.622)*es )'
     say 'save saturated specific humidity as qs [kg/kg]'
 return 
+
+function help()
+    say 'USEAGE: t2qs (temperature[C]) (pressure[Pa]) [-poly]'
+    say '        es[Pa] and qs[kg/kg] will be defined.'
+    say '        -poly for using a function of polynomial fits'
+return
