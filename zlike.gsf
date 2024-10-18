@@ -1,0 +1,32 @@
+function zlike(arg1,arg2)
+    if(arg1='arg1')
+        help()
+        return
+    endif
+    'var=const('arg1',0)'
+    if(arg2=''|arg2='arg2')
+        return 'var'
+    endif
+    zmin=qdims('zmin')
+    zmax=qdims('zmax')
+    size=zmax-zmin+1
+    count=count_num(arg2)
+    if(count<size)
+        say 'ERROR: the size of given values is less than Z levels'
+        return
+    endif
+    k=zmin
+    while(k<=zmax)
+        temp=subwrd(arg2,k)
+        'var=if(lev=lev(z='k'),'temp',var)'
+    k=k+1
+    endwhile
+    return 'var'
+
+function help()
+    say 'Usage:'
+    say '''out=''zlike(like_varname, assign_values_name)'
+    say 'example:'
+    say '   array=''1 2 3'''
+    say '   ''a=''zlike(''Q'',array)'
+return
