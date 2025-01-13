@@ -10,6 +10,8 @@
 ![](/color_kinds/drywet.png "drywet")
 #### grainbow
 ![](/color_kinds/grainbow.png "grainbow")
+#### dark_grainbow
+![](/color_kinds/dark_grainbow.png "dark_grainbow")
 #### gy100
 ![](/color_kinds/gy100.png "gy100")
 #### haxby
@@ -20,6 +22,8 @@
 ![](/color_kinds/IR.png "IR")
 #### jet
 ![](/color_kinds/jet.png "jet")
+#### dark_jet
+![](/color_kinds/dark_jet.png "dark_jet")
 #### prcp2
 ![](/color_kinds/prcp2.png "prcp2")
 #### precip2
