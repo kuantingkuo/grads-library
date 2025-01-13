@@ -16,7 +16,8 @@ function t2es_poly(t)
     'esi1='a.0'+'t'*('a.1'+'t'*('a.2'+'t'*('a.3'+'t'*('a.4'+'t'*('a.5'+'t'*('a.6'+'t'*('a.7'+'a.8'*'t')))))))'
     'esi1=esi1*100'
     'esi2=pow(10.,-9.09718*(273.16/tk-1.)-3.56654*log10(273.16/tk)+0.876793*(1.-tk/273.16)+log10(6.1071))*100.'
-    'esi=if('t'>=-77.35,esi1,esi2)'
+*    'esi=if('t'>=-77.35,esi1,esi2)'
+    'esi=const(maskout(esi1,'t'>=-77.35),0,-u)+const(maskout(esi2,'t'<-77.35),0,-u)'
 *LIQUID
     i=1
     while(i<=9)
@@ -27,12 +28,14 @@ function t2es_poly(t)
     'esw1='a.0'+'t'*('a.1'+'t'*('a.2'+'t'*('a.3'+'t'*('a.4'+'t'*('a.5'+'t'*('a.6'+'t'*('a.7'+'a.8'*'t')))))))'
     'esw1=esw1*100'
     'esw2=pow(10.,(-7.90298*(373.16/tk-1.)+5.02808*log10(373.16/tk)-1.3816e-7*(pow(10,11.344*(1.-tk/373.16))-1.)+8.1328e-3*(pow(10,-3.49149*(373.16/tk-1.))-1.)+log10(1013.246)))*100.'
-    'esw=if('t'>=-71.15,esw1,esw2)'
+*    'esw=if('t'>=-71.15,esw1,esw2)'
+    'esw=const(maskout(esw1,'t'>=-71.15),0,-u)+const(maskout(esw2,'t'<-71.15),0,-u)'
 *MIX
-    'es=if('t'<=-40,esi,esw)'
+*    'es=if('t'<=-40,esi,esw)'
     'ratio=('t'+40)/40'
     'esm=esw*ratio + esi*(1.-ratio)'
-    'es=if(('t'>-40)&('t'<0),esm,es)'
+*    'es=if(('t'>-40)&('t'<0),esm,es)'
+    'es=const(maskout(esi,'t'<=-40),0,-u)+const(maskout(esm,('t'>-40)&('t'<0)),0,-u)+const(maskout(esw,'t'>=0),0,-u)'
     say 'define saturation vapor pressure as es[Pa]'
 return
 
