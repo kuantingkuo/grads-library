@@ -12,7 +12,7 @@ function range(arg1,arg2,arg3)
         end=arg2
         inc=arg3
     else
-        help()
+        'range'
         exit
     endif
     endif
@@ -27,12 +27,3 @@ function range(arg1,arg2,arg3)
     endwhile
 return out
 
-function help()
-    say 'Usage:'
-    say 'list=range(<start>,end,<inc>)'
-    say 'start: initial number (default=1)'
-    say 'end  : end number'
-    say 'inc  : increment (default=1)'
-    say 'example: list=range(2,10,2)'
-    say '         list=''2 4 6 8 10'''
-    say 'Note that the end value is included!'
