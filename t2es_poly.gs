@@ -3,6 +3,7 @@ function t2es_poly(t)
         help()
         exit
     endif
+    check(t)
     'tk='t'+273.15'
     ai='6.11147274 0.503160820 0.188439774e-1 0.420895665e-3 0.615021634e-5 0.602588177e-7 0.385852041e-9 0.146898966e-11 0.252751365e-14'
     al='6.11239921 0.443987641 0.142986287e-1 0.264847430e-3 0.302950461e-5 0.206739458e-7 0.640689451e-10 -0.952447341e-13 -0.976195544e-15'
@@ -42,4 +43,32 @@ return
 function help()
     say 'USEAGE: t2es_poly <temperature[C]>'
     say '        es[Pa] will be defined.'
+return
+
+function check(t)
+    rc=gsfallow('on')
+    x1=qdims('xmin')
+    x2=qdims('xmax')
+    y1=qdims('ymin')
+    y2=qdims('ymax')
+    z1=qdims('zmin')
+    z2=qdims('zmax')
+    t1=qdims('tmin')
+    t2=qdims('tmax')
+    'set x 1'
+    'set y 1'
+    'set z 1'
+    'set t 1'
+    'd 't
+    val=subwrd(result,4)
+    if(val>100)
+        help()
+        rc=sys("echo -e $'\e[33mWARNING!\e[0m The unit of temperature might be wrong!'")
+        say rc
+    endif
+    'set x 'x1' 'x2
+    'set y 'y1' 'y2
+    'set z 'z1' 'z2
+    'set t 't1' 't2
+
 return
