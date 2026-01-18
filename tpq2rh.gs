@@ -10,7 +10,16 @@ function tpq2rh(args)
     t = subwrd(args,1)
     p = subwrd(args,2)
     q = subwrd(args,3)
+    if(t=''|p=''|q='')
+        help()
+        exit
+    endif
     't2es 't
     'e = 'p'*'q'/(0.622+(1-0.622)*'q')'
     'rh = e / es * 100'
-return 
+return
+
+function help()
+    say 'USEAGE: tpq2rh (temperature[C]) (pressure[Pa]) (specific humidity[kg/kg])'
+    say '        rh[%], es[Pa] and e[Pa] will be defined.'
+return
