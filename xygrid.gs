@@ -11,8 +11,12 @@ t2=qdims('tmax')
 'set z 'z1
 'set y 'y1
 'set x 'x1
-'dx=lon(x='x1+1')-lon(x='x1')'
-'dy=lat(y='y1+1')-lat(y='y1')'
+xa=qdims('xmin')
+ya=qdims('ymin')
+za=qdims('zmin')
+ta=qdims('tmin')
+'dx=lon(x='xa+1')-lon(x='xa')'
+'dy=lat(y='ya+1')-lat(y='ya')'
 'x0=lon'
 'y0=lat'
 'set x 'x1' 'x2
