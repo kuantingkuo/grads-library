@@ -1,12 +1,21 @@
 function zlike(arg1,arg2)
-    if(arg1='arg1')
+    if(arg1='arg1'|arg1='')
         help()
         return
     endif
-    'var=const('arg1',0)'
     if(arg2=''|arg2='arg2')
         return 'var'
     endif
+    x1=qdims('xmin')
+    x2=qdims('xmax')
+    y1=qdims('ymin')
+    y2=qdims('ymax')
+    t1=qdims('tmin')
+    t2=qdims('tmax')
+    'set x 1'
+    'set y 1'
+    'set t 1'
+    'var=const('arg1',0)'
     zmin=qdims('zmin')
     zmax=qdims('zmax')
     size=zmax-zmin+1
@@ -15,12 +24,16 @@ function zlike(arg1,arg2)
         say 'ERROR: the size of given values is less than Z levels'
         return
     endif
-    k=zmin
-    while(k<=zmax)
+    k=1
+    while(k<=size)
+        z=zmin+k-1
         temp=subwrd(arg2,k)
-        'var=if(lev=lev(z='k'),'temp',var)'
+        'var=if(lev=lev(z='z'),'temp',var)'
     k=k+1
     endwhile
+    'set x 'x1' 'x2
+    'set y 'y1' 'y2
+    'set t 't1' 't2
     return 'var'
 
 function help()
