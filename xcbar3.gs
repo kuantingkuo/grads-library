@@ -518,7 +518,7 @@ function xcbar( args )
 *    'draw string 'xmid' 'ymin-fheight-0.2' 'str2
       'draw string 'xmid' 'ymin-fheight*2' 'caption
     else
-      'set string 'fcolor' tc 'fthickness' 90'
+      'set string 'fcolor' tc 'fthickness' 270'
       'draw string 'xmax+fwidth*(2+maxstr)' 'ymid' 'caption
     endif
   endif
