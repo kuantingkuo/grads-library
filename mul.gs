@@ -18,7 +18,7 @@ function mul( args )
   npos    = 'none'
   xoffset = 0
   yoffset = 0
-  novpage = 0
+*  novpage = 0
   xini    = 'none'
   xwid    = 'none'
   xint    = 'none'
@@ -76,7 +76,6 @@ function mul( args )
 
 
 ***** set default value (landscape) *****
-
 ***** imax *****
 *** 1 ***
   xini.1 = 1.0
@@ -103,7 +102,14 @@ function mul( args )
   xwid.5 = 1.9
   xint.5 = 0.1
 
+*** 6 ***
+  xini.6 = 0.75
+  xwid.6 = 1.59
+  xint.6 = 0.1
 
+  xini.imax = 0.752
+  xint.imax = 0.1
+  xwid.imax = (vpagex - xini.imax - xint.imax*imax) / imax - 0.02
 ***** jmax *****
 *** 1 ***
   yini.1 = 1.0
@@ -130,7 +136,9 @@ function mul( args )
   ywid.5 = 1.4
   yint.5 = 0.1
 
-
+  yini.jmax = 0.8
+  yint.jmax = 0.0
+  ywid.jmax = (vpagey - yini.jmax - yint.jmax*jmax) / jmax - 0.5
 
 ***** set default value (portrait) *****
   if( vpagex = 8.5 & vpagey = 11 )
@@ -168,9 +176,9 @@ function mul( args )
   ymax = yini + (ywid + yint) * (jpos-1) + ywid + yoffset
 
   say 'set parea (by mul) -> xmin='xmin' xmax='xmax' ymin='ymin' ymax='ymax
-  if( novpage = 0 )
-    'set vpage 0 'vpagex' 0 'vpagey
-  endif
+*  if( novpage = 0 )
+*    'set vpage 0 'vpagex' 0 'vpagey
+*  endif
   'set parea 'xmin' 'xmax' 'ymin' 'ymax
 
 return
@@ -185,7 +193,7 @@ function help()
   say ' '
   say ' Usage:'
   say '   mul imax jmax ( ipos jpos | -n npos )'
-  say '       [-xoffset value/0] [-yoffset value/0] [-novpage]'
+  say '       [-xoffset value/0] [-yoffset value/0]'
   say '       [-xini value] [-xwid value] [-xint value]'
   say '       [-yini value] [-ywid value] [-yint value]'
   say ''
@@ -196,7 +204,7 @@ function help()
   say '     npos      : position (count from top-left window)'
   say '     xoffset   : offset of horizontal position'
   say '     yoffset   : offset of vertical position'
-  say '     novpage   : avoid "set vpage"'
+*  say '     novpage   : avoid "set vpage"'
   say '     xini,yini : lower-left position when "mul ? ? 1 1"'
   say '     xwid,ywid : width of figure'
   say '     xint,yint : interval of figures'
