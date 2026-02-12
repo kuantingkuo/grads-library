@@ -1,7 +1,7 @@
 function legend(args)
 ************************
 frame=0
-mg=0.01; h=0.4
+mg=0.01; h=0.5
 *mg: distance between legend and margin
 *h : hight of a line
 ************************
